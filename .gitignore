@@ -1,0 +1,12 @@
+
+
+# Ignore Node modules
+node_modules/
+
+# Ignore personal configuration files
+.env
+config.local.js
+
+# Ignore build directories
+build/
+dist/
