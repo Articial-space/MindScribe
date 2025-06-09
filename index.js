@@ -38,12 +38,16 @@ client.on('messageCreate', async message => {
         return;
     }
 
+
+
     // 3. Extract the question (remove the mention)
     const question = message.content.replace(`<@${client.user.id}>`, '').trim();
     const channelId = message.channel.id;
+    const attachment = message.attachments.first()
+    console.log(attachment);
 
     // 3.5 Check if a question was actually asked
-    if (!question) {
+    if (!question && !attachment) {
         console.log(`Bot mentioned without a question by ${message.author.tag}. Ignoring.`);
         // Optional: Send a help message
         // message.reply("Mention me and ask a question, e.g. `@MyBot How are you?`");
@@ -73,7 +77,8 @@ client.on('messageCreate', async message => {
             question: question,
             channelId: channelId,
             userId: message.author.id,
-            userName: message.author.username
+            userName: message.author.username,
+            attachment: attachment,
         }, {
             timeout: 300000 // Increase timeout to 5 minutes (300 seconds)
         });
