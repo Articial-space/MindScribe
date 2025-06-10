@@ -44,6 +44,7 @@ client.on('messageCreate', async message => {
     const question = message.content.replace(`<@${client.user.id}>`, '').trim();
     const channelId = message.channel.id;
     const attachment = message.attachments.first()
+    const messageId = message.id;
     console.log(attachment);
 
     // 3.5 Check if a question was actually asked
@@ -75,6 +76,7 @@ client.on('messageCreate', async message => {
         // 4. Send the question and channel ID to n8n with increased timeout
         const responseFromN8n = await axios.post(n8nWebhookUrl, {
             question: question,
+            messageId: messageId,
             channelId: channelId,
             userId: message.author.id,
             userName: message.author.username,
